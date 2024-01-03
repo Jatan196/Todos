@@ -2,4 +2,52 @@
 
 
 
+<!-- <p>todo-button works!</p> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TodoList App</title>
+ 
+</head>
+<body>
+
+  <div class="todo-container">
+    <div class="todo-header">
+      <h2>TodoList</h2>
+    </div>
+    <ul class="todo-list" id="todoList">
+      <!-- Todo items will be dynamically added here -->
+    </ul>
+    <input type="text" class="todo-input" id="newTodo" placeholder="Add a new todo">
+    <button class="add-button" onclick="addTodo()">Add Todo</button>
+  </div>
+
+  <script>
+    function addTodo() {
+      var newTodoInput = document.getElementById('newTodo');
+      var todoList = document.getElementById('todoList');
+      var newTodoText = newTodoInput.value.trim();
+
+      if (newTodoText !== '') {
+        var listItem = document.createElement('li');
+        listItem.className = 'todo-item';
+        listItem.innerHTML = `
+          <span>${newTodoText}</span>
+          <button onclick="removeTodo(this)">Remove</button>
+        `;
+        todoList.appendChild(listItem);
+        newTodoInput.value = '';
+      }
+    }
+
+    function removeTodo(button) {
+      var todoItem = button.parentNode;
+      todoItem.parentNode.removeChild(todoItem);
+    }
+  </script>
+
+</body>
+</html>
 

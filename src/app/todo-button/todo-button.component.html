@@ -1,109 +1,17 @@
-<!-- <p>todo-button works!</p> -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TodoList App</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f4f4f4;
-    }
+<div class="text-center">
+<app-add-todos (addTodoEvent)="addfunc($event)"></app-add-todos>
+<h4>Your Existing ToDo's</h4>
+<div *ngIf="this.todos.length===0; else elseBlock">No Todos to display</div>  
+ <ng-template #elseBlock>
 
-    .todo-container {
-      width: 300px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      overflow: hidden;
-    }
+  <div *ngFor="let todo of todos; index as i">
+    <!-- sending this todo set into another component for its styling  -->
+    <app-todo-item class="text-center" [todo]="todo" [i]="i" (todoDelete)="deleteFunc($event)" (todoCheckBox)="toggleTodo($event)"> {{todo.sno}}-{{todo.title}}--{{todo.desc}}</app-todo-item>
+    <!-- recieving the todoDelete's emitted event and we make deleteTodo as our own event , and thus we listens to it -->
+     </div>
+  </ng-template>
+</div>
 
-    .todo-header {
-      background-color: #3498db;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-    }
 
-    .todo-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
 
-    .todo-item {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
 
-    .todo-item:last-child {
-      border-bottom: none;
-    }
-
-    .todo-input {
-      width: calc(100% - 20px);
-      padding: 8px;
-      border: none;
-      border-radius: 3px;
-      margin: 10px;
-    }
-
-    .add-button {
-      width: calc(100% - 20px);
-      padding: 8px;
-      border: none;
-      border-radius: 3px;
-      margin: 10px;
-      background-color: #2ecc71;
-      color: #fff;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="todo-container">
-    <div class="todo-header">
-      <h2>TodoList</h2>
-    </div>
-    <ul class="todo-list" id="todoList">
-      <!-- Todo items will be dynamically added here -->
-    </ul>
-    <input type="text" class="todo-input" id="newTodo" placeholder="Add a new todo">
-    <button class="add-button" onclick="addTodo()">Add Todo</button>
-  </div>
-
-  <script>
-    function addTodo() {
-      var newTodoInput = document.getElementById('newTodo');
-      var todoList = document.getElementById('todoList');
-      var newTodoText = newTodoInput.value.trim();
-
-      if (newTodoText !== '') {
-        var listItem = document.createElement('li');
-        listItem.className = 'todo-item';
-        listItem.innerHTML = `
-          <span>${newTodoText}</span>
-          <button onclick="removeTodo(this)">Remove</button>
-        `;
-        todoList.appendChild(listItem);
-        newTodoInput.value = '';
-      }
-    }
-
-    function removeTodo(button) {
-      var todoItem = button.parentNode;
-      todoItem.parentNode.removeChild(todoItem);
-    }
-  </script>
-
-</body>
-</html>
