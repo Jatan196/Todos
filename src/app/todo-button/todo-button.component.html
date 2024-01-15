@@ -1,15 +1,25 @@
 <div class="text-center">
 <app-add-todos (addTodoEvent)="addfunc($event)"></app-add-todos>
 <h4>Your Existing ToDo's</h4>
-<div *ngIf="this.todos.length===0; else elseBlock">No Todos to display</div>  
- <ng-template #elseBlock>
+
+<div  *ngIf="this.todos.length===0; else elseBlock">No Todos to display</div> 
+ <ng-template  #elseBlock > 
 
   <div *ngFor="let todo of todos; index as i">
     <!-- sending this todo set into another component for its styling  -->
-    <app-todo-item class="text-center" [todo]="todo" [i]="i" (todoDelete)="deleteFunc($event)" (todoCheckBox)="toggleTodo($event)"> {{todo.sno}}-{{todo.title}}--{{todo.desc}}</app-todo-item>
-    <!-- recieving the todoDelete's emitted event and we make deleteTodo as our own event , and thus we listens to it -->
+    <app-todo-item class="text-center" [todo]="todo" [i]="i" (todoDelete)="deleteFunc($event)" (todoCheckBox)="toggleTodo($event)"> {{todo.sno}}  -{{todo.title}}--{{todo.desc}}</app-todo-item>
+    <!-- recieving the todo Delete's emitted event and we make deleteTodo as our own event , and thus we listens to it -->
      </div>
-  </ng-template>
+  </ng-template>  
+
+<div style="position: fixed; top: 60px; right: 10px; display: flex;">
+  <button type="button" class="btn btn-secondary border-light" (click)="clearAll()">Clear All Todos</button>
+  <div style="margin-left: 0px;">
+    <button type="button" class="btn btn-secondary border-light" (click)="clearAllDone()">Clear Completed Todos</button>
+  </div>
+</div>
+
+
 </div>
 
 

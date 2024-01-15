@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit} from '@angular/core';
 import { Todo } from '../Todo';
 import { CommonModule } from '@angular/common';
-// import { AsyncLocalStorage } from 'async_hooks';
 import { TodoItemComponent } from '../todo-item/todo-item.component';
 import { AddTodosComponent } from '../add-todos/add-todos.component';
+
 @Component({
   selector: 'app-todo-button',
   standalone: true,
@@ -12,62 +12,78 @@ import { AddTodosComponent } from '../add-todos/add-todos.component';
   styleUrl: './todo-button.component.css'
 })
 
-export class TodoButtonComponent {
+export class TodoButtonComponent implements   OnInit{ 
      todos:Todo[]
-    localItem:string
-     constructor(){
+     localItem:string | null;
+    //  constructor(){
+    
+    //  }
+    constructor() {
+  
+  this.localItem=null;
+  // this.todos=[
+  //   { sno: 1,
+  //     title:"OM ",
+  //     desc:"SaiRam",
+  //     active:true
+  //   }
+  //   ]
 
-        // this.localItem=localStorage.getItem("todos");
-        // if(this.localItem==null){
-        //    this.todos=[];
-        // }
-        // else{
-        //   this.todos=JSON.parse(this.localItem)
-        // }
-      this.todos=[
-        {
-          sno:1, 
-          title:"title1",
-          desc: "desc1",
-          active:true
-          
-         }
-         ,
-        {
-          sno:2, 
-          title:"title2",
-          desc: "desc2",
-          active:true
-          
-        },
-        {
-          sno:3, 
-          title:"title3",
-          desc: "desc3",
-          active:true
-          
-        }
-      ]
+      // Check if localStorage is available
+      if (typeof localStorage !== 'undefined') {
+          this.localItem = localStorage.getItem("todos");
+      }
+  
+      if (this.localItem == null) {
+          this.todos = [];
+      } 
+      else {
+        this.todos = JSON.parse(this.localItem);
+       
+      }
+  }
+     ngOnInit():void {
+       
+      }
+    addfunc(todo: Todo){
+   
+    
+      this.todos.push(todo)
+      console.log(this.todos)
+     // let localItem:string
+      console.log(localStorage);
+      localStorage.setItem("todos",JSON.stringify(this.todos))
+    this.localItem=localStorage.getItem("todos");
+      
+      
      }
-
      deleteFunc(todo:Todo){
       console.log(todo);
 
       const ind=this.todos.indexOf(todo)
 
       this.todos.splice(ind,1)
-      // localStorage.setItem("todos",JSON.stringify(this.todos))
+      localStorage.setItem("todos",JSON.stringify(this.todos))
      }
-     addfunc(todo: Todo){
-      console.log(todo);
-      this.todos.push(todo)
-      // localStorage.setItem("todos",JSON.stringify(this.todos))
-     }
+
      toggleTodo(todo:Todo){
       // if the button is clicked then event emitted by todo item is listened and handled here 
       const ind=this.todos.indexOf(todo)
-
-      this.todos[ind].active=!this.todos[ind].active
-      // local storage line localStorage.setItem("todos",JSON.stringfy(this.todos))
+    
+      this.todos[ind].active=! this.todos[ind].active;
+      localStorage.setItem("todos",JSON.stringify(this.todos))
      }
-}
+     
+     clearAll(){
+      this.todos=[];
+     }
+
+     clearAllDone(){
+      // this.doneTodos=[];
+         this.todos=this.todos.filter( (todo:Todo)=>{
+           return todo.active===true;
+         }) 
+
+     }
+
+  }

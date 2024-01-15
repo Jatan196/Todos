@@ -1,6 +1,6 @@
-import { Component,Output,EventEmitter} from '@angular/core';
+import { Component,Output,EventEmitter, ViewChild} from '@angular/core';
 import { Todo } from '../Todo';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 
 @Component({
@@ -14,16 +14,27 @@ import { FormsModule } from '@angular/forms';
 export class AddTodosComponent {
     title:any
     desc: any
+    
   @Output() addTodoEvent: EventEmitter<Todo> = new EventEmitter();
+  @ViewChild('myForm', { static: false }) myForm!: NgForm;
+  index:number;
+   
 
-   addTodo(){
-     const record={
-      sno:3,
+  addTodo(){
+    // Handle form submission logic here
+    let record={
+      sno:this.index,
           title:this.title,
           desc:this.desc,
           active:true
      }
+    this.index=this.index  +1;
     this.addTodoEvent.emit(record);
     console.log("submit button working")
-   }
+    
+    this.myForm.reset();
+    // Reset the form after submission
+    this.myForm.resetForm();
+  }
+
 }

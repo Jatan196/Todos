@@ -1,7 +1,6 @@
 
 
 
-
 <!-- <p>todo-button works!</p> -->
 <!DOCTYPE html>
 <html lang="en">
@@ -51,3 +50,27 @@
 </body>
 </html>
 
+localStorage.setItem("donetodos",JSON.stringify(this.doneTodos))
+doneTodos:Todo[]
+// logic 
+  this.doneTodos.push(this.todos[ind])
+          this.todos.splice(ind,1)
+
+
+const ind=this.doneTodos.indexOf(todo)
+  
+          this.doneTodos[ind].active=!this.doneTodos[ind].active
+          this.todos.push(this.todos[ind])
+          this.doneTodos.splice(ind,1)
+
+
+  this.todos[ind].active=!this.todos[ind].active
+         if(todo.active==true){
+          //toggle it and then manipulate two arrays
+  
+          
+        
+         }
+         else{ 
+            this.todos[ind].active!=
+         }
