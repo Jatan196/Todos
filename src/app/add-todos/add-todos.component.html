@@ -1,16 +1,16 @@
-<h4>Add a ToDo</h4>
-<form  #myForm="ngForm" (ngSubmit)="addTodo()">
-    <div class="form-group my3 mx3 text-center">
+<div class="container">
+  <h4 class="text-center">Add New Tasks</h4>
+  <form #myForm="ngForm" (ngSubmit)="addTodo()" class="mb-4">
+    <div class="form-group my-10 mx-19">
       <label for="title">Title</label>
       <input type="title" [(ngModel)]="title" class="form-control" name="title" id="title" aria-describedby="Title" placeholder="Enter Title">
-      <small id="title" class="form-text text-muted">Small Steps leads to BIG results</small>
-    
+      <h4 id="title" class="">Small steps lead to BIG results</h4>
     </div>
-    <div class="form-group">
-      <label for="desc">Description </label>
-      <input type="text" [(ngModel)] ="desc" class="form-control"  name="desc" id="desc" placeholder="Enter Description">
+    <div class="form-group my-3 mx-3">
+      <label for="desc">Description</label>
+      <input type="text" [(ngModel)]="desc" class="form-control" name="desc" id="desc" placeholder="Enter Description">
     </div>
- 
-    <button type="submit" class="btn btn-success btn-sm"  >Add</button>
+    <div class="text-center">
+      <button type="submit" class="btn btn-success btn-sm">Add</button>
+    </div>
   </form>
-  <!--   -->

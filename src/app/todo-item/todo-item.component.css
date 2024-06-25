@@ -1,0 +1,13 @@
+.todo-item {
+    border: 1px solid #dee2e6; /* Adds a light gray border */
+    border-radius: 1.0rem; /* Slightly rounded corners */
+    padding: 3rem; /* Adds some padding inside the div */
+    background-color: #f8f9fa; /* Light gray background color */
+    width: 40%;
+    flex-direction: row;
+    overflow: auto;
+    align-items:center;
+    font-size: large;
+    margin-bottom: 1rem; /* Adds space between each todo item */
+  }
+  

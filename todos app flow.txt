@@ -1,0 +1,7 @@
+1. in main html only nav bar router outlet is set
+2. then we created a general object as a serveice of todo and imported it in each compo
+3. then we made a add todo compo which will take input and convert in todo form and emit it t
+4.now todo button compo to display todos will import add todo to display form and accept new emmited todo and store it as record in localstorage 
+5. now will send each todo to a specific compo for its structring i,e,. todos item, which will show title desc which will we sent as input from todo button
+
+--> now input of user of delete todo or mark it as done , will be identified by this compo (todo -item ) and it will emit custom event and these events will be listened in todo button and will be handled there(since all localstorage work we are 

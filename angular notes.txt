@@ -1,0 +1,144 @@
+1. components are parts of a website , we divide the website in different componenets (i.e., separating concerns).
+2. app.module.ts -> entry point in app
+3.routing is used to open new urls withouting reloading webpage
+## INTERPOLATION
+--> {{}} = TO USE JAVASCRIPT EXPRESSSION( this method of displaying dynamic data on HTML is called INTERPOLATION ) + ALSO  everthing inside will generate value by applying normal js logic
+--> THINGS can't be achieved thorough interpolation
+* increment and derc operator
+* typeof 
+* = assnignment opertor
+--> if we assign this to a class attribute of a tag, then that dynmaic value can get allotee to class attribute
+
+# two way binding ( changing and displaying the variable or property at the same time) 
+by use of [(ngModel)] = variable_name
+
+#GENERATING COMPONENTS 
+
+ng generate component JatansComp
+- Changing values of variable (like title content) of export appcomponent class will relfect changes in orignal code and webpage wihtout reloading 
+- in @Component , selector indicates that this component is of which tag....
+- the contents of that app.component will be insert in index.html oringnal. file 
+
+#Directives in angular are custom html attributes , in which we can type js/ts logic ->> e.g. *ngFor directive
+
+# when we pass any elemtn to from a component to another component then we have to specify in that recieving component's ts file with input decorator + specifying in the parent component html file like ==>> {{  <app-todo-item  [todo]="todo"> {{todo.sno}}-{{todo.title}}--{{todo.desc}}</app-todo-item>  }}
+
+#while using bootstrap classes , we just need to specify the classes in html tags and css is directly applied
+
+# to handle event , if click on button -> 
+
+a) we send event ( ie., emit event from that component , mention in @Output decorator of that components ts file) and mention in the linking tag in html file of receiving event  , ie,. by the name of event emitter in emitting class, we created our own event , and
+b) so when todoDelete event is invoke , then we will handle it parent component throught funcitons and all ,
+c) for the info of todo we will send it to the original funciton through ' $event '  
+
+
+# to avoid from reloading on click on submti button 
+we do use (ngSubmit)=" onSubmit()"<--- its a method
+
+==>
+In Angular, pipes and directives are key features that enhance the functionality and flexibility of your applications. Let's discuss each of them:
+
+Pipes:
+Definition:
+
+Purpose: Pipes in Angular are used for transforming data in the template.
+
+Syntax: Pipes are applied to data using the | (pipe) character in the template.
+
+Example: The date pipe can be used to format a date.
+
+html
+Copy code
+<p>{{ today | date:'shortDate' }}</p>
+Common Built-in Pipes:
+
+DatePipe: Formats dates.
+UpperCasePipe and LowerCasePipe: Converts text to uppercase or lowercase.
+CurrencyPipe: Formats currency values.
+DecimalPipe and PercentPipe: Formats numbers and percentages.
+AsyncPipe: Handles asynchronous operations (e.g., observables).
+Custom Pipes:
+
+You can also create your own custom pipes to perform specific data transformations.
+Custom pipes must implement the PipeTransform interface.
+Directives:
+Definition:
+
+Purpose: Directives in Angular are markers on a DOM element that tell Angular to do something to that element or its children.
+Types:
+Structural Directives: Change the structure of the DOM by adding or removing elements.
+Examples: *ngIf, *ngFor, *ngSwitch.
+Attribute Directives: Change the appearance or behavior of an element.
+Examples: ngStyle, ngClass.
+Structural Directives Example:
+
+The *ngIf directive conditionally adds or removes elements based on a given expression.
+
+html
+Copy code
+<div *ngIf="isLoggedIn">
+  Welcome, {{ username }}!
+</div>
+Attribute Directives Example:
+
+The ngStyle directive dynamically applies styles to an element based on an expression.
+
+html
+Copy code
+<div [ngStyle]="{'color': isActive ? 'green' : 'red'}">
+  This text is dynamically styled.
+</div>
+Creating Custom Directives:
+
+You can create your own custom directives for advanced behavior.
+Custom directives are often used to encapsulate complex DOM manipulations or reusable behaviors.
+##### for ngClass directive ( import CommonModule in that component and also import all componnents in apps module.ts with ngMOdule, if prev step didn't worked)		
+
+####The myForm property is not automatically available in your component class. Instead, you need to use the @ViewChild decorator to access the form in your component class.Also first give template reference  #myForm="ngForm" 		
+
+# ROUTING ( DEBUG)
+The routerLink should be set to the route path, not the file paths of the components. Also, make sure to correct the typos in the route configurations in your routes.ts file.
+
+
+router oulet removes the current component and adds the paths component
+
+
+# dependecny injection 
+service--> its a provisioin to have reusable code ( a class  having business logics and can be used outside it , by creating its instances 
+
+-----------------------------------------------------------------------------------------------------------------------
+###### Life cycle hooks:->
+
+ %=> ngOnChanges:- this fn is executed when there is change in any input from parent to child component
+-> it also displys curr , prev values , if we console changes( its argument)
+-> it compares the references of property from parent to child , if different , then detect it as change 
+
+*** but if we use a common public class's object or any instance then it will take it as same reference , and didn't detect it as input change 
+*** for it if we set a new instance( or value of type of that class/property} it will take it as diff reference 
+
+
+%=>ngDoCheck :- it check all the changes manually ( irrespective of refernce ) and display each updated value
+
+ %=> ngOnInit :-( in ss) , executed when after intialsed and before displayed , means 1st const, then ngOnInint , it is to execute logic which we want to be done at very first after creation of component( also before child's const & ngoninint  , parent's ones are executed ).
+ 
+%=> content projection==> it is the passing of dynamic data in child component 
+
+*** TO PASS DYNAMIC DATA( HTML ,COMPLEX HTML ,ANY OTHER COMP..) FROM PARENT TO CHILD COMPONENT ( use "ng-content" tag )
+->9 so all code passed from parent will displayed acc to ng-content
+
+** ngAfterContentInit=> runs only once when some ng-content is intialised and used
+** ngAfterContentChecked => runs each whenever there is a change to the content passed to child from parent 
+
+*** if we pass a compo to child , then that will also a child of this child , and thus can it can be accessed using @ContentChild...decorator
+
+%=> ngAfterViewInint :-> invoked only once after has been intialised ,
+-> button tag is also a child of <= HTML component
+-> @ViewChild -> we can access properoties of child compoc 
+
+
+%=> ngAfterViewChecked :-> whenever change in view , either due to current or child's component
+
+%=> ngOnDestroy :=> when component no in use , for memory efficinecy & to reduce memory leak
+
+
+Z% DON'T USE LOCALSTORAGE IN CONSTRUCTOR OF ANY COMPONENTS CLASs, if use then in inside typeof if condition blokc

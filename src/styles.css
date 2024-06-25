@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+.screen{
+    background-color: aqua;
+    background-image: url('https://images.pexels.com/photos/5190598/pexels-photo-5190598.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load');
+}

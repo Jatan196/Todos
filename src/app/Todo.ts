@@ -5,7 +5,7 @@ export class Todo{
     active:boolean
     // endDate:number
     constructor(){
-        this.sno=0
+        this.sno=1
         this.title='Jatan'
         this.desc='Jatan '
         this.active=false
